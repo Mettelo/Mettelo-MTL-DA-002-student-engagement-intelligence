@@ -10,28 +10,13 @@ Place the original downloaded OULAD source files in this folder.
 - `studentInfo.csv`
 - `studentRegistration.csv`
 - `vle.csv`
-- `studentVle.zip` — compressed source for the very large `studentVle.csv`
+- `studentVle.zip` — compressed source containing `studentVle.csv`
 
 ## Large File Handling
 
-`studentVle.csv` is approximately 454 MB uncompressed, so it must **not** be committed to normal GitHub storage.
+`studentVle.csv` is approximately 454 MB uncompressed, so it must not be committed directly to normal GitHub storage.
 
-For this project, keep the compressed `studentVle.zip` in this folder using **Git LFS**.
-
-The repository-level `.gitattributes` file marks `data/raw/*.zip` for Git LFS.
-
-### Uploading studentVle.zip
-
-From a local clone of this repository:
-
-```bash
-git lfs install
-git pull
-cp /path/to/studentVle.zip data/raw/studentVle.zip
-git add .gitattributes data/raw/studentVle.zip
-git commit -m "Add raw student VLE dataset"
-git push origin main
-```
+The compressed `studentVle.zip` is approximately 44 MB and can be stored directly in this private repository.
 
 Do not extract `studentVle.csv` and commit the extracted file.
 

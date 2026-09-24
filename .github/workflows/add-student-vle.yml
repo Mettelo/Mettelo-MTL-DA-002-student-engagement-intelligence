@@ -1,0 +1,63 @@
+name: Add OULAD studentVle raw dataset
+
+on:
+  push:
+    paths:
+      - ".github/workflows/add-student-vle.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download official OULAD archive
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/oulad
+          curl -L --fail --retry 3             "https://archive.ics.uci.edu/static/public/349/open+university+learning+analytics+dataset.zip"             -o /tmp/oulad/oulad.zip
+
+      - name: Extract studentVle.csv and create compressed project file
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import zipfile, os, shutil
+
+          src = "/tmp/oulad/oulad.zip"
+          out_dir = "data/raw"
+          os.makedirs(out_dir, exist_ok=True)
+
+          with zipfile.ZipFile(src) as z:
+              names = z.namelist()
+              target = next((n for n in names if n.endswith("studentVle.csv")), None)
+              if not target:
+                  raise SystemExit("studentVle.csv not found in official OULAD archive")
+              with z.open(target) as r, open("/tmp/oulad/studentVle.csv", "wb") as w:
+                  shutil.copyfileobj(r, w)
+
+          with zipfile.ZipFile(os.path.join(out_dir, "studentVle.zip"), "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+              z.write("/tmp/oulad/studentVle.csv", arcname="studentVle.csv")
+
+          size = os.path.getsize(os.path.join(out_dir, "studentVle.zip"))
+          print(f"Created data/raw/studentVle.zip: {size/1024/1024:.2f} MB")
+          if size >= 100 * 1024 * 1024:
+              raise SystemExit("Compressed file unexpectedly exceeds GitHub's 100 MB per-file limit")
+          PY
+
+      - name: Commit dataset
+        run: |
+          set -euo pipefail
+          git config user.name "Mettelo Project Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/raw/studentVle.zip
+          if git diff --cached --quiet; then
+            echo "No data change to commit."
+          else
+            git commit -m "Add raw student VLE dataset"
+            git push
+          fi

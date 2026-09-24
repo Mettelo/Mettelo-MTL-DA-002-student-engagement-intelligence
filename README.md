@@ -13,46 +13,83 @@
 > **Confidentiality Notice**  
 > The client identity is intentionally withheld. This is a simulated Mettelo Project Studio engagement built around a real anonymised public learning-analytics dataset. Participants must not represent the confidential client as a real external Mettelo customer.
 
-## Engagement Summary
+## Repository Purpose
 
-A large digital higher-education provider is concerned about student withdrawal, inconsistent engagement, differences in assessment performance, and limited visibility of early warning signals.
+This repository is the official Mettelo source of truth for:
 
-Senior leaders currently receive separate reports covering enrolment, assessments and online-learning activity. These reports do not provide a single analytical view connecting student characteristics, registration behaviour, assessment activity, virtual-learning engagement and final outcomes.
+- project requirements;
+- business context;
+- source data;
+- governance;
+- deliverables;
+- team repository standards;
+- final submission instructions.
 
-The project team has been asked to build a reproducible analytical solution that helps decision-makers understand:
+Participating teams do **not** submit their solution into this master repository.
 
-- student engagement patterns;
-- withdrawal and completion behaviour;
-- assessment performance;
-- differences between modules and presentations;
-- potential early warning indicators;
-- limitations and risks in using behavioural data for intervention.
+Each approved team creates its own GitHub repository and submits that repository URL to Mettelo.
 
-This is not a dashboard-only exercise. Teams are expected to work like a real analytics delivery team.
+## Repository Structure
 
-## Important Submission Model
+```text
+.
+├── README.md
+│
+├── project/
+│   ├── README.md
+│   ├── PROJECT_BRIEF.md
+│   ├── BUSINESS_CONTEXT.md
+│   ├── DELIVERABLES.md
+│   └── GOVERNANCE.md
+│
+├── data/
+│   ├── README.md
+│   ├── raw/
+│   │   └── README.md
+│   ├── reference/
+│   │   └── README.md
+│   └── metadata/
+│       └── README.md
+│
+└── submission/
+    ├── README.md
+    ├── TEAM_REPOSITORY_STANDARD.md
+    ├── SUBMISSION_GUIDE.md
+    └── FINAL_SUBMISSION_TEMPLATE.md
+```
 
-**Teams do not submit work into this master repository.**
+## Start Here
 
-Each approved team must:
-
-1. create its own GitHub repository;
-2. follow the mandatory Mettelo repository structure;
-3. add the designated Mettelo reviewer account as a collaborator if the repository is private;
-4. complete all required deliverables inside its own repository;
-5. submit the final repository URL to Mettelo.
+### 1. Understand the project
 
 Read:
 
-- [TEAM_REPOSITORY_STANDARD.md](TEAM_REPOSITORY_STANDARD.md)
-- [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md)
+- [Project Brief](project/PROJECT_BRIEF.md)
+- [Business Context](project/BUSINESS_CONTEXT.md)
+- [Deliverables](project/DELIVERABLES.md)
+- [Governance](project/GOVERNANCE.md)
 
-## Required Reading
+### 2. Get the data
 
-1. [PROJECT_BRIEF.md](PROJECT_BRIEF.md)
-2. [BUSINESS_CONTEXT.md](BUSINESS_CONTEXT.md)
-3. [DELIVERABLES.md](DELIVERABLES.md)
-4. [DATA.md](DATA.md)
-5. [TEAM_REPOSITORY_STANDARD.md](TEAM_REPOSITORY_STANDARD.md)
-6. [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md)
-7. [GOVERNANCE.md](GOVERNANCE.md)
+Read:
+
+- [Data Workspace](data/README.md)
+
+The original OULAD files can be downloaded and placed under `data/raw/` where practical.
+
+### 3. Create your team's delivery repository
+
+Read:
+
+- [Team Repository Standard](submission/TEAM_REPOSITORY_STANDARD.md)
+- [Submission Guide](submission/SUBMISSION_GUIDE.md)
+
+Use:
+
+- [Final Submission Template](submission/FINAL_SUBMISSION_TEMPLATE.md)
+
+## Important
+
+The **team's own GitHub repository** is the official delivery artefact.
+
+The **Mettelo master repository** remains the source of truth for the project brief, data instructions, governance and submission standards.
